@@ -56,21 +56,30 @@ router.put('/updatenote/:id', fetchuser, async (req, res) => {
 
      if(note.user.toString() !== req.user.id){
         console.log(note.user.toHexString, req.user.id);
-        return res.status(401).send("not allowed");
-        
-     }
+        return res.status(401).send("not allowed");        
+     }        
 
-         
-     const newNote = {};
      if(title){note.title = title}
      if(description){note.description = description}
      if(tag){note.tag = tag}
 
      await note.save();
-     res.json({note});
-
-    
+     res.json({note});  
 
 });
 
+router.delete('/deletenote/:id', fetchuser, async (req, res) => { 
+
+     let note = await Note.findById(req.params.id);
+     if (note == null) {
+       res.status(404).send("Not found hi iiiiii ");
+       return;
+     }
+     if (note.user.id != req.user.id) {
+       return res.status(401).send("not allowed");
+     }
+     await note.delete();
+     res.json({ message: "note has been deleted", ...note });
+
+});
 module.exports = router;
