@@ -75,7 +75,8 @@ router.delete('/deletenote/:id', fetchuser, async (req, res) => {
        res.status(404).send("Not found hi iiiiii ");
        return;
      }
-     if (note.user.id != req.user.id) {
+     if (note.user._id != req.user.id) {
+       console.log(note.user._id);
        return res.status(401).send("not allowed");
      }
      await note.delete();
