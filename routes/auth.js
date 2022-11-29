@@ -52,7 +52,7 @@ router.post(
       // res.json(user)
       res.json({ authtoken });
     } catch (errors) {
-      console.error(error.message);
+      console.error(errors.message);
       res.status(500).send("Internal Server Error");
     }
   }
