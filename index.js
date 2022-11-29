@@ -17,7 +17,7 @@ app.use("/api/auth", require('./routes/auth.js'));
 app.use("/api/note", require('./routes/note.js'));
 
 app.get('/', (req, res) => {
-  res.send('Hello Worl dfdfdf  d!'); 
+  res.send('INOTE web app api...'); 
 })
 
 app.listen(port, () => {
